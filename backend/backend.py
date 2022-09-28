@@ -13,3 +13,5 @@ def signup():
             return redirect(url_for('auth.signup'))
 
         new_user = User(email = email, name=name, password=password)
+
+        
