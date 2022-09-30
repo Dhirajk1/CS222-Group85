@@ -14,9 +14,12 @@ database.init.app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-class User(database.Model, UserMixin):
+class UserClass(database.Model, UserMixin):
     identification = database.Column(database.Integer, primary_key = True)
-    username = database.Column(database.String())
+    username = database.Column(database.String(12), unique = True)
+    email = database.Column(database.String(99), unique = True)
+    password = database.Column(database.String(99))
+
 
 if __name__ == "__main__":
     app.run(debug = True)
