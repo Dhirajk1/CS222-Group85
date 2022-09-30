@@ -12,3 +12,4 @@ def index():
 def profile():
     return 'profile'
 
+print("PLEASE WORK")
