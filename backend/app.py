@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 """imports of necessary modules for app initilization and user class functionality"""
 from flask import Flask
 from flask import jsonify
@@ -51,6 +49,9 @@ from login import login_
 
 app.register_blueprint(login_, url_prefix='')
 
+from signup import signup_
+
+app.register_blueprint(signup_, url_prefix='')
+
 if __name__ == "__main__":
     app.run(debug = True)
->>>>>>> 370d4f0688a6afd351452b0d404e8c2ac867e08b
