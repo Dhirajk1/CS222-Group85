@@ -5,14 +5,16 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_login import UserMixin
 
-database = SQLAlchemy()
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "cs222"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
-
-from app import database
+database = SQLAlchemy()
+database.init_app(app)
+# from app import database
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 class UserClass(database.Model, UserMixin):
@@ -20,13 +22,11 @@ class UserClass(database.Model, UserMixin):
     user class that inherits from UserMixin for default methods
     for flask login lib and from the SQLAlchemy
     """
-    identification = database.Column(database.String(99), primary_key = True)
-    username = database.Column(database.String(12), unique = True)
-    email = database.Column(database.String(99), unique = True)
-    password = database.Column(database.String(99))
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+    identification = database.Column(database.String(99), primary_key=True)
+    username = database.Column(database.String(12), unique=True)
+    email = database.Column(database.String(99), unique=True)
+    password = database.Column(database.String(99))
 
 
 @login_manager.user_loader
@@ -37,21 +37,22 @@ def load_user(user_id):
     """
     return UserClass.get(user_id)
 
-@app.route('/')
+
+@app.route("/")
 def calendar_home():
     """
     meant to open up a standard blankslate homepage for now
     """
-    return jsonify({"Loaded calendar page" : True})
+    return jsonify({"Loaded calendar page": True})
 
 
 from login import login_
 
-app.register_blueprint(login_, url_prefix='')
+app.register_blueprint(login_, url_prefix="")
 
 from signup import signup_
 
-app.register_blueprint(signup_, url_prefix='')
+app.register_blueprint(signup_, url_prefix="")
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)
