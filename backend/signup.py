@@ -20,8 +20,10 @@ def signup():
     password = request.form.get("password")
     email = request.form.get("email")
     username = request.form.get("username")
+    
     user_email = UserClass.query.filter_by(email=email).first()
     user_username = UserClass.query.filter_by(username=username).first()
+
     if user_email or user_username:
         return jsonify({"user already exists": True})
     new_current_user = UserClass(

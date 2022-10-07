@@ -14,7 +14,6 @@ def login_test():
     req = requests.post("http://127.0.0.1:5000", {"email" : "amash2@illinois.edu", "username" : "Aryan", "password" : "cs222Aryan"})
     print(req.content)
 
-
 def calendar_home_test():
     """tests homepage"""
     assert calendar_home() == jsonify({"Loaded Calendar page" : True})

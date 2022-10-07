@@ -17,15 +17,19 @@ def login():
         password = request.form.get("password")
         email = request.form.get("email")
         user = UserClass.query.filter_by(email = email).first()
+        if not user:
+            return jsonify({"User does not exist" : True})
+        elif not check_password_hash(user.password, password):
+            return jsonify({"Password incorrect" : True})
+        else: 
+            return jsonify({"login success" : True})
     elif request.method == "GET":
         return jsonify({"Return login page" : True})
-    if not check_password_hash(user.password, password) and not user:
-        return jsonify({"Login Fail, username and password are incorrect or don't match" : False})
-    return jsonify({"Login True" : True})
+    
 
 @login_.route("/logout")
 def logout():
 
     """function that logs the user out, outputs if successful"""
 
-    return jsonify({{"Logout Success": True}})
+    return jsonify({"Logout Success": True})
