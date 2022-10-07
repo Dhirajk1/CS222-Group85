@@ -11,8 +11,9 @@ signup_ = Blueprint("signup_", __name__)
 
 @signup_.route("/signup", methods=["GET", "POST"])
 def signup():
-    database.create_all()
     """signup function that creates users"""
+
+    database.create_all()
 
     if request.method == "GET":
         return jsonify({"Return signup page": True})
