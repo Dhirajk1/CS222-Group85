@@ -1,21 +1,8 @@
-'''
+"""
 Python objects for storing the calendar
-'''
+"""
 import datetime
 from typing import List
-from flask_login import UserMixin
-from sqlalchemy import ForeignKey
-from app import database
-
-
-class CalendarClass(database.Model, UserMixin):
-    """
-    A class for the Calendar object as stores in the database (time entries are a csv string)
-    """
-
-    identification = database.Column(database.String(99), primary_key=True)
-    user_id = database.Column(database.String(99), ForeignKey("user.identification"))
-    times = database.Column(database.Text)
 
 
 class Calendar:
@@ -23,25 +10,29 @@ class Calendar:
     Calendar class
     """
 
-    def __init__(self, user: str, times_csv: str):
+    def __init__(self, calendar):
         self.busy = []
-        self.user = user
-        for time in times_csv.split(","):
+        self.time_details = []
+        self.user_id = calendar.user_id
+        for time in calendar.times.split(","):
             self.busy.append(datetime.datetime.fromisoformat(time))
+        for detail in calendar.details.split(","):
+            self.time_details.append(detail)
 
     def print(self):
         """
         Print the user and times
         """
-        print(f"User: {self.user}")
+        print(f"User: {self.user_id}")
         print("\nTimes:")
-        print(self.busy)
+        print([time.strftime("%c") for time in self.busy])
+        print(self.time_details)
 
-    def get_user(self):
+    def get_user(self) -> str:
         """
         Get Calendar's User
         """
-        return self.user
+        return self.user_id
 
     def get_busy_times(self) -> List[datetime.datetime]:
         """

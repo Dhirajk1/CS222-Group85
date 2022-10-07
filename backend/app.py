@@ -4,7 +4,9 @@ from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_login import UserMixin
-
+from sqlalchemy import ForeignKey
+from Calendar import Calendar
+import uuid
 
 app = Flask(__name__)
 
@@ -29,6 +31,17 @@ class UserClass(database.Model, UserMixin):
     password = database.Column(database.String(99))
 
 
+class CalendarClass(database.Model, UserMixin):
+    """
+    A class for the Calendar object as stores in the database (time entries are a csv string)
+    """
+
+    identification = database.Column(database.String(99), primary_key=True)
+    user_id = database.Column(database.String(99))
+    times = database.Column(database.Text)
+    details = database.Column(database.Text)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     """
@@ -44,6 +57,25 @@ def calendar_home():
     meant to open up a standard blankslate homepage for now
     """
     return jsonify({"Loaded calendar page": True})
+
+
+@app.route("/test/calendar")
+def test_calendar():
+    database.create_all()
+    test_id = str(uuid.uuid1())
+    new_calendar = CalendarClass(
+        identification=test_id,
+        times="2011-11-04 00:05:23.283+00:00,2014-01-14 00:15:23.283+00:00",
+        user_id="myUser:)",
+        details="EVENT,Event2",
+    )
+    database.session.add(new_calendar)
+    database.session.commit()
+
+    calendar = CalendarClass.query.filter_by(identification=test_id).first()
+    my_calendar = Calendar(calendar)
+    my_calendar.print()
+    return jsonify({"result": "Success?"})
 
 
 from login import login_
