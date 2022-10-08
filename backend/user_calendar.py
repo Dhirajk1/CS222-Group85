@@ -39,3 +39,9 @@ class Calendar:
         Returns a list of all busy times
         """
         return self.busy
+
+    def get_event_details(self) -> List[str]:
+        """
+        Return a list of all the event's details
+        """
+        return self.time_details
