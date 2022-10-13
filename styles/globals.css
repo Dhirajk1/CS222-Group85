@@ -1,3 +1,8 @@
+.wrapper {
+position:fixed; 
+top:0; 
+left:1;
+}
 .body {
   --color-primary: #009579;
   --color-primary-dark: #007f67;
@@ -45,6 +50,7 @@ a {
   box-shadow: 0 0 40px rgba(27, 148, 213, 0.431);
   border-radius: var(--border-radius);
   background: #ffffff;
+  font: 500 1rem 'Quicksand', sans-serif;
 }
 
 .container,

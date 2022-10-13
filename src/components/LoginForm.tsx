@@ -40,7 +40,7 @@ function LoginForm({ Login, error }: IProps) {
     <div className="wrapper" role="logo">
     <div className="logo">
       <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"
-       width="500" height="450"/>
+       width="200" height="200"/>
     </div>
   </div>
   <div className="container">
@@ -96,7 +96,7 @@ function LoginForm({ Login, error }: IProps) {
         </div>
 
        <input aria-label="button" className="form__button" type="submit" value="Login" />
-       <p><a href="http://www.google.com/">Don't have an Account? Create Account</a></p>
+       {/* <p><a href="http://www.google.com/">Don't have an Account? Create Account</a></p> */}
     </form>
     </div>
 
