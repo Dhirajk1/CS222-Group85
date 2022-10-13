@@ -3,11 +3,12 @@ Python objects for storing the calendar
 """
 import datetime
 from typing import List
+from .calendar_utils import file_is_good, parse_ical
 
 
-class Calendar:
+class UserCalendar:
     """
-    Calendar class
+    Calendar class for users
     """
 
     def __init__(self, calendar):
@@ -18,6 +19,13 @@ class Calendar:
             self.busy.append(datetime.datetime.fromisoformat(time))
         for detail in calendar.details.split(","):
             self.time_details.append(detail)
+
+    def import_ical(self, i_cal_file: str):
+        """
+        Recieves an ical file, parses it and adds it to the calendar
+        """
+        if file_is_good(i_cal_file):
+            self.time_details, self.busy = parse_ical(i_cal_file)
 
     def print(self):
         """

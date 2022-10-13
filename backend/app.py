@@ -5,7 +5,7 @@ from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_login import UserMixin
-from user_calendar import Calendar
+from user_calendar import UserCalendar
 
 app = Flask(__name__)
 
@@ -75,7 +75,7 @@ def test_calendar():
     database.session.commit()
 
     calendar = CalendarClass.query.filter_by(identification=test_id).first()
-    my_calendar = Calendar(calendar)
+    my_calendar = UserCalendar(calendar)
     my_calendar.print()
 
     return jsonify(
