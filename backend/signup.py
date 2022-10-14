@@ -11,16 +11,14 @@ signup_ = Blueprint("signup_", __name__)
 
 @signup_.route("/signup", methods=["GET", "POST"])
 def signup():
-    database.create_all()
     """signup function that creates users"""
-
+    database.create_all()
     if request.method == "GET":
         return jsonify({"Return signup page": True})
 
     password = request.form.get("password")
     email = request.form.get("email")
     username = request.form.get("username")
-    
     user_email = UserClass.query.filter_by(email=email).first()
     user_username = UserClass.query.filter_by(username=username).first()
 
