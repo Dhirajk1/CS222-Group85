@@ -34,7 +34,7 @@ def file_is_good(file_path: str) -> bool:
         print("Error: Sorry I can only parse .ics files :(")
         return False
     try:
-        open(file_path, "r", encoding="utf-8")
+        open(file_path, "r", encoding="utf-8")  # pylint: disable=consider-using-with
         return True
     except IOError:
         print("Error: File does not appear to exist.")

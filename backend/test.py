@@ -1,7 +1,10 @@
-from app import *
+"""Testing for backend code"""
 import requests
+from flask import jsonify
+from app import app, calendar_home
 
-
+# disabled for testing purposes
+# pylint: disable=missing-timeout
 def signup_test():
 
     """Test case for signup"""

@@ -1,10 +1,13 @@
-from flask import jsonify
-from flask import Blueprint
-from flask import request
-from werkzeug.security import generate_password_hash
-from app import UserClass
-from app import database
+"""
+Functions for handling user signup
+"""
 import uuid
+from flask import jsonify, Blueprint, request
+from werkzeug.security import generate_password_hash
+
+# cyclic import avoided by import placement within file
+# pylint: disable=cyclic-import
+from app import UserClass, database
 
 signup_ = Blueprint("signup_", __name__)
 
@@ -29,8 +32,8 @@ def signup():
         username=username,
         password=generate_password_hash(password, method="sha256"),
     )
-
-    database.session.add(new_current_user)
-    database.session.commit()
+    # next lines are not recognized as member actions by pylint
+    database.session.add(new_current_user)  # pylint: disable=maybe-no-member
+    database.session.commit()  # pylint: disable=maybe-no-member
 
     return jsonify({"home page": True})
