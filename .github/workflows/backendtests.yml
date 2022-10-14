@@ -27,7 +27,7 @@ jobs:
         run: pip install pandas
       - name: Install pandas
         run: pip install requests 
-      - name: Install pandas
+      # - name: Install pandas
       #   run: pip install pylint
       # - name: Super-Linter
       #   uses: github/super-linter@v4.9.7
