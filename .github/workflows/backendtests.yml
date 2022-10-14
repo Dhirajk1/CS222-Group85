@@ -17,4 +17,4 @@ jobs:
         uses: actions/setup-python@v2
       - name: execute py script # run file
         run: |
-          python test.py
+          python "C:\Users\Soham\OneDrive\Documents\Soham Work\CS 222\CS222-Group85\backend\test.py"
