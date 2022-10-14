@@ -28,11 +28,14 @@ jobs:
       - name: Install pandas
         run: pip install requests 
       - name: Install pandas
-        run: pip install pylint
-      - name: Super-Linter
-        uses: github/super-linter@v4.9.7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: execute py script # run file
+      #   run: pip install pylint
+      # - name: Super-Linter
+      #   uses: github/super-linter@v4.9.7
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install pytest
         run: |
-          python "backend/test.py"
+          python -m pip install --upgrade pip
+          pip install pytest
+      - name: execute py script # run file
+        run: pytest backend/test.py
