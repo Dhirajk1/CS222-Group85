@@ -1,8 +1,6 @@
-import Link from 'next/link'
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "./cs_222_logo.jpeg";
-import CreateForm from "../components/CreateForm";
 //Inspired by https://www.youtube.com/watch?v=7uKVFD_VMT8
 
 interface Details {
@@ -16,9 +14,9 @@ interface IProps {
 }
 function LoginForm({ Login, error }: IProps) {
   const [details, setDetails] = useState<Details>({
-  name: "",
-  email: "",
-  password: "",
+    name: "",
+    email: "",
+    password: "",
   });
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,19 +27,15 @@ function LoginForm({ Login, error }: IProps) {
   <div className="body">
     <div className="wrapper" role="logo">
     <div className="logo">
-      <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"
-       width="200" height="200"/>
+      <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"/>
     </div>
   </div>
   <div className="container">
     <form className="form" role="form" id="login" onSubmit={(e) => submitHandler(e)}>
         <h1 className="form__title">Login</h1>
         {error != "" ? <div className="form__message--error">{error}</div> : ""}
-
-        {/* username input area when logging in */}
-
         <div className="form__input-group">
-          <label htmlFor="name">Username:</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
@@ -52,8 +46,6 @@ function LoginForm({ Login, error }: IProps) {
             value={details.name}
           />
         </div>
-
-        {/* email input area when logging in */}
 
         <div className="form__input-group">
           <label htmlFor="email">Email:</label>
@@ -67,8 +59,6 @@ function LoginForm({ Login, error }: IProps) {
             value={details.email}
           />
         </div>
-
-        {/* password input area when logging in */}
 
         <div className="form__input-group">
           <label htmlFor="password">Password:</label>
@@ -85,8 +75,7 @@ function LoginForm({ Login, error }: IProps) {
           />
         </div>
 
-       <input aria-label="button" className="form__button" type="submit" value="Login" />
-       <p>Don't have an Account? Create Account</p>
+        <input aria-label="button" className="form__button" type="submit" value="LOGIN" />
     </form>
     </div>
     </div>
