@@ -5,7 +5,7 @@ name: Python application
 
 on:
   push:
-    branches: [ "backendFinal" ]
+    branches: [ "backendFinal", "BugFixesDoneTesting", "backendTesting" ]
   pull_request:
     branches: [ "backendFinal", "BugFixesDoneTesting", "backendTesting"]
 
@@ -14,26 +14,19 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+  strategy:
+    matrix:
+      node-version: [14.x, 16.x, 18.x]
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3 
       with:
-        python-version: "3.10"
-    install: 
-        pip install --upgrade pip &&\
-            pip install -r requirements.txt
-
-    test:
-        python -m pytest -vv test.py
-
-    format:
-        black *.py
-    
-    lint:
-        pylint --disable=R,C backend
-    
-    all: install lint test
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test
+    - run: npm run lint
