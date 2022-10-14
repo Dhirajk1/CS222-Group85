@@ -24,7 +24,9 @@ jobs:
       - name: Install werkzeug
         run: pip install werkzeug
       - name: Install pandas
-        run: pip install pandas  
+        run: pip install pandas
+      - name: Install pandas
+        run: pip install requests 
       - name: execute py script # run file
         run: |
           python "backend/test.py"
