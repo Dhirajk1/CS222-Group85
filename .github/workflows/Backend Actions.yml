@@ -23,5 +23,7 @@ jobs:
           pip install pytest
       - name: Run Tests
         run: python -m pytest -vv backend/
+      - name: Install pylint
+        run: pip install pylint
       - name: Run Lint
         run: pylint backend
