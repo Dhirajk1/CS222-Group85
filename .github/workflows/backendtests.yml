@@ -15,8 +15,16 @@ jobs:
         uses: actions/checkout@v2 # checkout the repository content to github runner.
       - name: setup python
         uses: actions/setup-python@v2
-      - name: Install npm dependencies
+      - name: Install Flask
         run: pip install Flask
+      - name: Install sql
+        run: pip install flask-sqlalchemy
+      - name: Install login
+        run: pip install flask-login
+      - name: Install werkzeug
+        run: pip install werkzeug
+      - name: Install pandas
+        run: pip install pandas  
       - name: execute py script # run file
         run: |
           python "backend/test.py"
