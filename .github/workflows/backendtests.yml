@@ -2,9 +2,9 @@ name: backend test
 
 on:
   push:
-    branches: [ "backendFinal", "BugFixesDoneTesting", "backendTesting" ]
+    branches: [ "backendFinal", "BugFixesDoneTesting", "backendTesting", "gitActionTesting" ]
   pull_request:
-    branches: [ "backendFinal", "BugFixesDoneTesting", "backendTesting"]
+    branches: [ "backendFinal", "BugFixesDoneTesting", "backendTesting", "gitActionTesting"]
 
 jobs:
   build:
