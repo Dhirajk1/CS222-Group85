@@ -15,18 +15,19 @@ login_ = Blueprint("login_", __name__)
 def login():
 
     """login function that checks credentials"""
-
     if request.method == "POST":
+        print(request.form)
         password = request.form.get("password")
         email = request.form.get("email")
+        print(f"email: {email} password {password}")
         user = UserClass.query.filter_by(email=email).first()
         print(user)
-        if user and check_password_hash(user.password, password=password):
-            return jsonify({"Login True": True})
+        if user and check_password_hash(user.password, password):
+            return jsonify({"Login True": True}), 201
         return jsonify(
             {"Login Fail, username and password are incorrect or don't match": False}
         )
-    return jsonify({"Return login page": True})
+    return jsonify({"Return login page": True}), 201
 
 
 @login_.route("/logout")

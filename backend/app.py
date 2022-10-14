@@ -1,6 +1,7 @@
 """imports of necessary modules for app initilization and user class functionality"""
 import uuid
 from flask import Flask
+from flask_cors import CORS
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -8,7 +9,7 @@ from flask_login import UserMixin
 from user_calendar import UserCalendar
 
 app = Flask(__name__)
-
+CORS(app)
 # pylint: disable=too-few-public-methods
 # methods are broken up into different files
 
