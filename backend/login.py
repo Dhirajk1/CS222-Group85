@@ -20,13 +20,13 @@ def login():
         password = request.form.get("password")
         email = request.form.get("email")
         user = UserClass.query.filter_by(email=email).first()
-    elif request.method == "GET":
-        return jsonify({"Return login page": True})
-    if not check_password_hash(user.password, password) and not user:
+        print(user)
+        if user and check_password_hash(user.password, password):
+            return jsonify({"Login True": True})
         return jsonify(
             {"Login Fail, username and password are incorrect or don't match": False}
         )
-    return jsonify({"Login True": True})
+    return jsonify({"Return login page": True})
 
 
 @login_.route("/logout")

@@ -35,5 +35,5 @@ def signup():
     # next lines are not recognized as member actions by pylint
     database.session.add(new_current_user)  # pylint: disable=maybe-no-member
     database.session.commit()  # pylint: disable=maybe-no-member
-
+    assert UserClass.query.filter_by(email=email).first() is not None
     return jsonify({"home page": True})
