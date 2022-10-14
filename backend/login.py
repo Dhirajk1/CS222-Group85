@@ -29,6 +29,7 @@ def login():
 
 @login_.route("/logout")
 def logout():
+    
 
     """function that logs the user out, outputs if successful"""
 
