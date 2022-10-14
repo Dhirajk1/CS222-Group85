@@ -21,7 +21,7 @@ def login():
         email = request.form.get("email")
         user = UserClass.query.filter_by(email=email).first()
         print(user)
-        if user and check_password_hash(user.password, password):
+        if user and check_password_hash(user.password, password=password):
             return jsonify({"Login True": True})
         return jsonify(
             {"Login Fail, username and password are incorrect or don't match": False}
