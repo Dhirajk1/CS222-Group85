@@ -27,7 +27,8 @@ function LoginForm({ Login, error }: IProps) {
   <div className="body">
     <div className="wrapper" role="logo">
     <div className="logo">
-      <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"/>
+      <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"
+        width="200" height="200"/>
     </div>
   </div>
   <div className="container">
