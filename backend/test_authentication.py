@@ -1,21 +1,23 @@
-from ast import Assert
-from app import *
-from signup import signup
-from login import login, logout
-from flask import url_for
-from flask import jsonify
-import requests
+# from ast import Assert
+# from asyncio.windows_events import NULL
+# from calendar import Calendar
+# from app import *
+# from signup import signup
+# from login import login, logout
+# from flask import url_for
+# from flask import jsonify
+# import requests
 
-def test_signup():
-    """Test case for signup"""
+# def test_signup():
+#     """Test case for signup"""
     # req = requests.post("http://127.0.0.1:5000", {"email" : "sohamsk2@illinois.edu",
     #                                               "username" : "kulksoh21",
     #                                               "password" : "sohamcs222"})
     # print(req.content)
-    a = 1
-    assert a + 1 == 2
-
-
+def test_github_actions():
+    """checking if github actions works with testcases"""
+    i = 2
+    assert i + 1 == 3
 
 # def test_login():
 #     """tests basic login functionality"""
