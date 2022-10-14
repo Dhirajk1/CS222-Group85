@@ -3,7 +3,26 @@ Python objects for storing the calendar
 """
 import datetime
 from typing import List
+from dataclasses import dataclass
 from .calendar_utils import file_is_good, parse_ical
+
+
+@dataclass
+class CalendarEntry:
+    """
+    Object to store entries
+    """
+
+    title: str
+    start: datetime
+    end: datetime
+
+    def to_str(self) -> str:
+        """
+        String representation of the Calendar Entry
+        """
+        return f"Event: {self.title}; \
+            Starts at: {self.start.strftime('%c')}; Ends at {self.end.strftime('%c')}"
 
 
 class UserCalendar:
@@ -12,13 +31,23 @@ class UserCalendar:
     """
 
     def __init__(self, calendar):
-        self.busy = []
-        self.time_details = []
+        self.entries = []
         self.user_id = calendar.user_id
-        for time in calendar.times.split(","):
-            self.busy.append(datetime.datetime.fromisoformat(time))
-        for detail in calendar.details.split(","):
-            self.time_details.append(detail)
+
+        titles = calendar.details.split(",")
+        times = calendar.times.split(",")
+        if len(times) != len(titles):
+            raise ValueError("Title and Time Counts don't match")
+
+        for title, time in zip(titles, times):
+            start, end = time.split("=>")
+            self.entries.append(
+                CalendarEntry(
+                    title,
+                    datetime.datetime.fromisoformat(start),
+                    datetime.datetime.fromisoformat(end),
+                )
+            )
 
     def import_ical(self, i_cal_file: str):
         """

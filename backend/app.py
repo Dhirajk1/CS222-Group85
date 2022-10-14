@@ -67,7 +67,7 @@ def test_calendar():
     test_id = str(uuid.uuid1())
     new_calendar = CalendarClass(
         identification=test_id,
-        times="2011-11-04 00:05:23.283+00:00,2014-01-14 00:15:23.283+00:00",
+        times="2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00",
         user_id="myUser:)",
         details="EVENT,Event2",
     )
