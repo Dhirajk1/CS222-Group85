@@ -1,0 +1,27 @@
+name: backend test
+
+on:
+  push:
+    branches: ["Calendar-Class"]
+  pull_request:
+    branches: ["Calendar-Class"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - name: setup packages
+        uses: actions/setup-python@v2
+      - name: Install packages
+        run: pip -r backend/requirements.txt
+      - name: Install pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+      - name: Run Tests
+        run: python -m pytest -vv backend/
+      - name: Run Lint
+        run: pylint backend
