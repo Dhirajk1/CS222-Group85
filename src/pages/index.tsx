@@ -44,7 +44,6 @@ const Home: NextPage = () => {
         </div>
       ) : (
         <LoginForm Login={Login} error={error} />
-        // <CreateForm Create={Create} error={error} />
       )}
     </div>
   );
