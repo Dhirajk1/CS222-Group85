@@ -1,13 +1,16 @@
 """imports of necessary modules for app initilization and user class functionality"""
 import uuid
-from flask import Flask
-from flask import jsonify
+from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_login import UserMixin
-from user_calendar import Calendar
+from user_calendar import UserCalendar
 
 app = Flask(__name__)
+CORS(app)
+# pylint: disable=too-few-public-methods
+# methods are broken up into different files
 
 app.config["SECRET_KEY"] = "cs222"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
@@ -67,29 +70,34 @@ def test_calendar():
     test_id = str(uuid.uuid1())
     new_calendar = CalendarClass(
         identification=test_id,
-        times="2011-11-04 00:05:23.283+00:00,2014-01-14 00:15:23.283+00:00",
+        times="2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00",
         user_id="myUser:)",
-        details="EVENT,Event2",
+        details="EVENT",
     )
-    database.session.add(new_calendar)
-    database.session.commit()
+    # next lines are not recognized as member actions by pylint
+    database.session.add(new_calendar)  # pylint: disable=maybe-no-member
+    database.session.commit()  # pylint: disable=maybe-no-member
 
     calendar = CalendarClass.query.filter_by(identification=test_id).first()
-    my_calendar = Calendar(calendar)
+    my_calendar = UserCalendar(calendar)
     my_calendar.print()
 
     return jsonify(
         {
             "result": "Success?",
-            "user_id": my_calendar.get_user(),
-            "busy-times": [
-                time.strftime("%c") for time in my_calendar.get_busy_times()
-            ],
-            "event-details": my_calendar.get_event_details(),
+            "calendar_info": {
+                "user_id": my_calendar.get_user(),
+                "entries": [entry.to_str() for entry in my_calendar.get_entries()],
+            },
         }
     )
 
 
+# We need to do some peculiar things with our import so that our app
+# has access to the database and user schemas (hence the disablising of the linter here)
+
+
+# pylint: disable=wrong-import-position
 from login import login_
 
 app.register_blueprint(login_, url_prefix="")
@@ -97,7 +105,7 @@ app.register_blueprint(login_, url_prefix="")
 from signup import signup_
 
 app.register_blueprint(signup_, url_prefix="")
-
+# pylint: enable=wrong-import-position
 
 if __name__ == "__main__":
     app.run(debug=True)

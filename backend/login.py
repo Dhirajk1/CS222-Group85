@@ -3,27 +3,31 @@ from flask import jsonify
 from flask import Blueprint
 from flask import request
 from werkzeug.security import check_password_hash
+
+# cyclic import avoided by import placement within file
+# pylint: disable=cyclic-import
 from app import UserClass
 
 login_ = Blueprint("login_", __name__)
 
-# login route, handles get/post methods
+
 @login_.route("/login", methods=["GET", "POST"])
 def login():
 
     """login function that checks credentials"""
-
     if request.method == "POST":
+        print(request.form)
         password = request.form.get("password")
         email = request.form.get("email")
+        print(f"email: {email} password {password}")
         user = UserClass.query.filter_by(email=email).first()
-    elif request.method == "GET":
-        return jsonify({"Return login page": True})
-    if not check_password_hash(user.password, password) and not user:
+        print(user)
+        if user and check_password_hash(user.password, password):
+            return jsonify({"Login True": True}), 201
         return jsonify(
             {"Login Fail, username and password are incorrect or don't match": False}
         )
-    return jsonify({"Login True": True})
+    return jsonify({"Return login page": True}), 201
 
 
 @login_.route("/logout")
@@ -31,4 +35,4 @@ def logout():
 
     """function that logs the user out, outputs if successful"""
 
-    return jsonify({{"Logout Success": True}})
+    return jsonify({"Logout Success": True})
