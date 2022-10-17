@@ -2,9 +2,9 @@ name: backend test
 
 on:
   push:
-    branches: ["Calendar-Class"]
+    branches: ["Backend Actions.yml"]
   pull_request:
-    branches: ["Calendar-Class"]
+    branches: ["Backend Actions.yml"]
 
 jobs:
   build:
