@@ -57,13 +57,13 @@ a {
   width: 600px;
   max-width: 600px;
   margin: 1rem;
-  padding: 1rem;
+  padding: 3rem;
   box-shadow: 0 0 40px rgba(27, 148, 213, 0.431);
   /* border-radius: var(--border-radius); */
   border-radius: 15px 50px 30px;
-  background: #00f7ff;
+  background: #ffffff;
   font: 500 1rem 'Verdana', sans-serif;
-  font-size: 0.75rem; 
+  font-size: 0.55rem; 
   color: #767676;
 }
 

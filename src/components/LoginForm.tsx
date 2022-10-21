@@ -81,7 +81,7 @@ function LoginForm({ Login, error }: IProps) {
 
         <input aria-label="button" className="form__button" type="submit" value="LOGIN" />
         {/* <input aria-label="button" className="form__button" type="submit" value="Create" /> */}
-        <p><a href="http://localhost:3000/creator">Don't have an Account? Create Account</a></p>
+        <p><a href="http://localhost:3000/creator">Don&apos;t have an Account? Create Account</a></p>
     </form>
     </div>
     </div>
