@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import LoginForm from "../components/LoginForm";
+
 const Home: NextPage = () => {
   interface Details {
     name: string;
@@ -26,6 +27,7 @@ const Home: NextPage = () => {
       setError("Invalid Login");
     }
   };
+
   const Logout = () => {
     setUser({
       name: "",
@@ -45,6 +47,7 @@ const Home: NextPage = () => {
       ) : (
         <LoginForm Login={Login} error={error} />
       )}
+
     </div>
   );
 };

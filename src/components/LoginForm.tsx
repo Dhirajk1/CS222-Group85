@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "./cs_222_logo.jpeg";
@@ -77,6 +80,8 @@ function LoginForm({ Login, error }: IProps) {
         </div>
 
         <input aria-label="button" className="form__button" type="submit" value="LOGIN" />
+        {/* <input aria-label="button" className="form__button" type="submit" value="Create" /> */}
+        <p><a href="http://localhost:3000/creator">Don't have an Account? Create Account</a></p>
     </form>
     </div>
     </div>
