@@ -42,7 +42,7 @@ a {
   background: #ffffff;
 }
 
-.container1 {
+.container2 {
   width: 400px;
   max-width: 400px;
   margin: 1rem;
@@ -52,6 +52,21 @@ a {
   background: #ffffff;
   font: 500 1rem 'Quicksand', sans-serif;
 }
+
+.container3 {
+  width: 600px;
+  max-width: 600px;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 40px rgba(27, 148, 213, 0.431);
+  /* border-radius: var(--border-radius); */
+  border-radius: 15px 50px 30px;
+  background: #00f7ff;
+  font: 500 1rem 'Verdana', sans-serif;
+  font-size: 0.75rem;
+  color: #767676;
+}
+
 
 .container,
 .form__input,

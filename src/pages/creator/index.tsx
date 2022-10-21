@@ -59,7 +59,7 @@ function CreateForm({ Create, error }: IProps) {
        width="200" height="200"/>
     </div>
   </div>
-    <div className="container1">
+    <div className="container2">
     <form className="form" role="form" id="create_account" onSubmit={(e) => submitHandler(e)}></form>
     <h1 className="form__title">Create Account</h1>
         {error != "" ? <div className="form__message--error">{error}</div> : ""}
@@ -146,7 +146,12 @@ function CreateForm({ Create, error }: IProps) {
           <input aria-label="button" className="form__button" type="submit" value="Create Account" />
           <p><a href="http://localhost:3000">Already Have an Account? Sign In</a></p>
         </div>
-
+      
+        </div>
+        <div className="container3">
+            <h1> Rules for Setting up Account</h1>
+            <h1> Minimum UserName length: 8 characters</h1>
+            <h1> Password requirements: 1 number and 1 special character</h1>
         </div>
     </div>
   );
