@@ -97,7 +97,6 @@ def test_events():
     """testing whether the events are sendable"""
     database.create_all()
     test_id = str(uuid.uuid1())
-    # test_id = "123asfda"
     new_calendar = CalendarClass(
         identification=test_id,
         times="2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00",
@@ -107,14 +106,8 @@ def test_events():
     # next lines are not recognized as member actions by pylint
     database.session.add(new_calendar)  # pylint: disable=maybe-no-member
     database.session.commit()  # pylint: disable=maybe-no-member
-    # user = "myUser:)"
     user = str(request.args.get("user_id"))
-    print(user)
-    # print(CalendarClass.query)
-    # user = "user_id:"
     calendar = CalendarClass.query.filter_by(user_id = user).first()
-    # my_calendar.print()
-    # print(my_calendar)
     print(calendar)
     if(calendar): # pylint: disable=superfluous-parens
         print("reach")
