@@ -117,7 +117,7 @@ def test_events():
                 "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
-    ) # pylint: disable=duplicate-code
+    )
 
     return jsonify(
             {"no user found": False}
@@ -131,7 +131,7 @@ def test_events():
 
 # pylint: disable=wrong-import-position
 from login import login_
-# pylint: disable=duplicate-code
+
 app.register_blueprint(login_, url_prefix="")
 
 from signup import signup_

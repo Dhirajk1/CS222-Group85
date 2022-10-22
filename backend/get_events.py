@@ -13,14 +13,18 @@ def get_events():
     """"This gives events to the frontend in order for the calendars to be able to be displayed"""
     user = request.form.get("user_id")
     calendar = CalendarClass.query.filter_by(user_id = user).first()
-    my_calendar = UserCalendar(calendar)
-    my_calendar.print()
 
-    return jsonify(
+    if(calendar): # pylint: disable=superfluous-parens
+        my_calendar = UserCalendar(calendar)
+        return jsonify(
         {
             "result": "Success?",
-            "info_to_send": {
-                "event": [enter.to_str() for enter in my_calendar.get_entries()],
+            "info": {
+                "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
-    ) # pylint: disable=duplicate-code
+    )
+
+    return jsonify(
+            {"no user found": False}
+        )
