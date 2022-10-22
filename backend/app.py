@@ -81,8 +81,7 @@ def test_calendar():
 
     calendar = CalendarClass.query.filter_by(identification=test_id).first()
     my_calendar = UserCalendar(calendar)
-    my_calendar.print()
-    
+    my_calendar.print()    
     return jsonify(
         {
             "result": "Success?",

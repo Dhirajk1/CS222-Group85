@@ -1,11 +1,10 @@
 """imports of necessary modules for getting calandar events functionality"""
-import uuid
 from flask import jsonify
 from flask import Blueprint
 from flask import request
 from user_calendar import UserCalendar
 
-from app import CalendarClass, UserClass, database
+from app import CalendarClass
 
 events_ = Blueprint("events_", __name__)
 
