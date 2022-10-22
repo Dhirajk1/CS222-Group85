@@ -121,7 +121,7 @@ def test_events():
 
     return jsonify(
             {"no user found": False}
-        )# pylint: disable=duplicate-code
+        )
 
 
 
@@ -131,7 +131,7 @@ def test_events():
 
 # pylint: disable=wrong-import-position
 from login import login_
-# pylint: disable=duplicate-code
+
 app.register_blueprint(login_, url_prefix="")
 
 from signup import signup_

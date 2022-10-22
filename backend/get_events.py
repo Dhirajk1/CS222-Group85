@@ -18,8 +18,8 @@ def get_events():
         my_calendar = UserCalendar(calendar)
         return jsonify(
         {
-            "result": "Success?",
-            "info": {
+            "r": "Success!",
+            "info_to_send": {
                 "events": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
