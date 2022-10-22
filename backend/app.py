@@ -1,4 +1,5 @@
 """imports of necessary modules for app initilization and user class functionality"""
+from types import NoneType
 from urllib import request
 import uuid
 from flask import request # pylint: disable=reimported
@@ -113,11 +114,13 @@ def test_events():
     # print(CalendarClass.query)
     # user = "user_id:"
     calendar = CalendarClass.query.filter_by(user_id = user).first()
-    my_calendar = UserCalendar(calendar)
-    my_calendar.print()
-    print(my_calendar)
-
-    return jsonify(
+    # my_calendar.print()
+    # print(my_calendar)
+    print(calendar)
+    if(calendar):
+        print("reach")
+        my_calendar = UserCalendar(calendar)
+        return jsonify(
         {
             "result": "Success?",
             "info": {
@@ -125,6 +128,11 @@ def test_events():
             },
         }
     ) # pylint: disable=duplicate-code
+    print("hi")
+    return jsonify(
+            {"no user found": False}
+        )
+
 
 
 # We need to do some peculiar things with our import so that our app

@@ -88,6 +88,16 @@ class FlaskAppTests(unittest.TestCase):
         }
         self.assertEqual(req.json, expected)
 
+    def test_get_events_fail(self):
+        """
+        Test to see if get calendar events work
+        """
+        req = self.app.get('/test/events', query_string={'user_id': 'myUser'})
+        self.assertEqual(
+            req.json,
+            {"no user found": False},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
