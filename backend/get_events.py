@@ -24,3 +24,5 @@ def get_events():
             },
         }
     )
+    # nolint
+    

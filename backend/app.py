@@ -120,7 +120,7 @@ def test_events():
         {
             "result": "Success?",
             "info": {
-                "events_to_send": [entry.to_str() for entry in my_calendar.get_entries()],
+                "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
     )
