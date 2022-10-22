@@ -80,7 +80,7 @@ class FlaskAppTests(unittest.TestCase):
                 "user_id": "myuser:(",
             },)
         expected = {
-            "calendar_info": {
+            "info": {
                 "entries": [
                     "Event: EVENT; Starts at: Thu Aug 25 09:00:00 2022; "
                     "Ends at: Thu Aug 25 11:30:00 2022",

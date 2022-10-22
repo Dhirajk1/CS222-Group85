@@ -119,7 +119,7 @@ def test_events():
     return jsonify(
         {
             "result": "Success?",
-            "calendar_info": {
+            "info": {
                 "entries": [entry.to_str() for entry in my_calendar.get_entries()],
             },
         }
