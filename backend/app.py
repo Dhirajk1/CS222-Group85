@@ -117,7 +117,7 @@ def test_events():
     # my_calendar.print()
     # print(my_calendar)
     print(calendar)
-    if(calendar):
+    if(calendar): # pylint: disable=superfluous-parens
         print("reach")
         my_calendar = UserCalendar(calendar)
         return jsonify(
