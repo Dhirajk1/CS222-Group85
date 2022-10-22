@@ -123,7 +123,7 @@ def test_events():
                 "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
-    )
+    ) # pylint: disable=duplicate-code
 
 
 # We need to do some peculiar things with our import so that our app
