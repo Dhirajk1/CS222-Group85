@@ -108,9 +108,7 @@ def test_events():
     database.session.commit()  # pylint: disable=maybe-no-member
     user = str(request.args.get("user_id"))
     calendar = CalendarClass.query.filter_by(user_id = user).first()
-    print(calendar)
     if(calendar): # pylint: disable=superfluous-parens
-        print("reach")
         my_calendar = UserCalendar(calendar)
         return jsonify(
         {
@@ -120,7 +118,7 @@ def test_events():
             },
         }
     ) # pylint: disable=duplicate-code
-    print("hi")
+
     return jsonify(
             {"no user found": False}
         )

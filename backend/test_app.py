@@ -74,7 +74,7 @@ class FlaskAppTests(unittest.TestCase):
 
     def test_get_events(self):
         """
-        Test to see if get calendar events work
+        Test to see if get calendar events work correct user
         """
         req = self.app.get('/test/events', query_string={'user_id': 'myUser:('})
         expected = {
