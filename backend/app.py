@@ -1,7 +1,7 @@
 """imports of necessary modules for app initilization and user class functionality"""
 from urllib import request
 import uuid
-from flask import request
+from flask import request # pylint: disable=reimported
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -81,7 +81,7 @@ def test_calendar():
 
     calendar = CalendarClass.query.filter_by(identification=test_id).first()
     my_calendar = UserCalendar(calendar)
-    my_calendar.print()    
+    my_calendar.print()
     return jsonify(
         {
             "result": "Success?",
