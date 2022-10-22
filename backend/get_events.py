@@ -19,8 +19,8 @@ def get_events():
     return jsonify(
         {
             "result": "Success?",
-            "info": {
-                "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
+            "info_to_send": {
+                "event": [enter.to_str() for enter in my_calendar.get_entries()],
             },
         }
     ) # pylint: disable=duplicate-code
