@@ -1,5 +1,4 @@
 """imports of necessary modules for app initilization and user class functionality"""
-from types import NoneType
 from urllib import request
 import uuid
 from flask import request # pylint: disable=reimported
