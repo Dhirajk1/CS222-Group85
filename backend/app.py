@@ -1,5 +1,7 @@
 """imports of necessary modules for app initilization and user class functionality"""
+from urllib import request
 import uuid
+from flask import request
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -60,7 +62,6 @@ def calendar_home():
     """
     return jsonify({"Loaded calendar page": True})
 
-
 @app.route("/test/calendar")
 def test_calendar():
     """
@@ -81,12 +82,45 @@ def test_calendar():
     calendar = CalendarClass.query.filter_by(identification=test_id).first()
     my_calendar = UserCalendar(calendar)
     my_calendar.print()
-
+    
     return jsonify(
         {
             "result": "Success?",
             "calendar_info": {
                 "user_id": my_calendar.get_user(),
+                "entries": [entry.to_str() for entry in my_calendar.get_entries()],
+            },
+        }
+    )
+
+@app.route("/test/events", methods=["GET"])
+def test_events():
+    """testing whether the events aare sendable"""
+    database.create_all()
+    test_id = str(uuid.uuid1())
+    user = request.form.get("user_id")
+    new_calendar = CalendarClass(
+        identification=test_id,
+        times="2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00",
+        user_id=user,
+        details="EVENT",
+    )
+    # next lines are not recognized as member actions by pylint
+    database.session.add(new_calendar)  # pylint: disable=maybe-no-member
+    database.session.commit()  # pylint: disable=maybe-no-member
+    # user = "myUser:)"
+    print(request.form)
+    user2 = "user_id"
+    calendar = CalendarClass.query.filter_by(user_id = user).first()
+    print(type(user2))
+    print(type(user))
+    my_calendar = UserCalendar(calendar)
+    my_calendar.print()
+
+    return jsonify(
+        {
+            "result": "Success?",
+            "calendar_info": {
                 "entries": [entry.to_str() for entry in my_calendar.get_entries()],
             },
         }
