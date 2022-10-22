@@ -20,11 +20,11 @@ def get_events():
         {
             "result": "Success?",
             "info": {
-                "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
+                "events": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
     )
 
     return jsonify(
             {"This user does not exist": False}
-        )# pylint: disable=duplicate-code
+        )
