@@ -94,27 +94,28 @@ def test_calendar():
 
 @app.route("/test/events", methods=["GET"])
 def test_events():
-    """testing whether the events aare sendable"""
+    """testing whether the events are sendable"""
     database.create_all()
     test_id = str(uuid.uuid1())
-    user = request.form.get("user_id")
+    # test_id = "123asfda"
     new_calendar = CalendarClass(
         identification=test_id,
         times="2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00",
-        user_id=user,
+        user_id="myUser:(",
         details="EVENT",
     )
     # next lines are not recognized as member actions by pylint
     database.session.add(new_calendar)  # pylint: disable=maybe-no-member
     database.session.commit()  # pylint: disable=maybe-no-member
     # user = "myUser:)"
-    print(request.form)
-    user2 = "user_id"
+    user = str(request.args.get("user_id"))
+    print(user)
+    # print(CalendarClass.query)
+    # user = "user_id:"
     calendar = CalendarClass.query.filter_by(user_id = user).first()
-    print(type(user2))
-    print(type(user))
     my_calendar = UserCalendar(calendar)
     my_calendar.print()
+    print(my_calendar)
 
     return jsonify(
         {
