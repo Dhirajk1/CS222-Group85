@@ -81,7 +81,7 @@ class FlaskAppTests(unittest.TestCase):
             },)
         expected = {
             "info": {
-                "entries": [
+                "events_to_send": [
                     "Event: EVENT; Starts at: Thu Aug 25 09:00:00 2022; "
                     "Ends at: Thu Aug 25 11:30:00 2022",
                 ],

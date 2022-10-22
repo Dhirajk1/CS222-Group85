@@ -20,7 +20,7 @@ def get_events():
         {
             "result": "Success?",
             "info": {
-                "entries": [entry.to_str() for entry in my_calendar.get_entries()],
+                "events_to_send": [entry.to_str() for entry in my_calendar.get_entries()],
             },
         }
     )
