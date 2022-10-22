@@ -26,5 +26,5 @@ def get_events():
     )
 
     return jsonify(
-            {"no user found": False}
+            {"This user does not exist": False}
         )# pylint: disable=duplicate-code
