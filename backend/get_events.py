@@ -23,5 +23,4 @@ def get_events():
                 "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
             },
         }
-    )
-    # nolint
+    ) # pylint: disable=duplicate-code
