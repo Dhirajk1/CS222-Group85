@@ -62,7 +62,7 @@ class FlaskAppTests(unittest.TestCase):
         """
         Test to see if get calendar events work for wrong user
         """
-        req = self.app.get("/calendar/send/events", data={"user_id": "myUser"})
+        req = self.app.get("/calendar/events/find", data={"user_id": "myUser"})
         self.assertEqual(
             req.json,
             {"found": False},
@@ -85,7 +85,7 @@ class FlaskAppTests(unittest.TestCase):
             # next lines are not recognized as member actions by pylint
             tested_app.database.session.add(entry)  # pylint: disable=maybe-no-member
             tested_app.database.session.commit()  # pylint: disable=maybe-no-member
-            req = self.app.get("calendar/send/events", data={"user_id": "test123"})
+            req = self.app.get("calendar/events/find", data={"user_id": "test123"})
             self.assertEqual(
                 req.json,
                 {
@@ -104,6 +104,13 @@ class FlaskAppTests(unittest.TestCase):
                     "found": True,
                 },
             )
+
+    def test_add_event_no_user(self):
+        """add event for user not present"""
+        req = self.app.post("/calendar/events/add", data={"user_id": "sdkfljnalsf"})
+        self.assertEqual(
+            req.json, {"sucess": False, "error": "user's calendar not found"}
+        )
 
 
 if __name__ == "__main__":
