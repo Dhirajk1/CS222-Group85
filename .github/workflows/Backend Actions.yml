@@ -2,9 +2,9 @@ name: backend test
 
 on:
   push:
-    branches: ["Backend Actions.yml", "handleRewards"]
+    branches: ["backendFinal", "handleRewards"]
   pull_request:
-    branches: ["Backend Actions.yml", "handleRewards"]
+    branches: ["backendFinal", "handleRewards"]
 
 jobs:
   build:
