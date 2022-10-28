@@ -97,6 +97,16 @@ class FlaskAppTests(unittest.TestCase):
             req.json,
             {"no user found": False},
         )
+    
+    def test_add_events(self):
+        """
+        Test to see if calendar add count works
+        """
+        req = self.app.get('/test/count_events')
+        self.assertEqual(
+            req.json,
+            {"Success!": True},
+        )
 
 
 if __name__ == "__main__":

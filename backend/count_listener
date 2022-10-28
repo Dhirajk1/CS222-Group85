@@ -1,0 +1,33 @@
+"""This is a listener that I have created in order to get messages from the frontend"""
+import queue
+import flask
+from flask import Blueprint
+
+reciever_ = Blueprint("reciever_", __name__)
+
+class MessageAnnouncer:
+    """This is the announcer class which will allow messages to be sent through the server"""
+    def __init__(self):
+        self.listeners = []
+
+    def print(self):
+        """Temporary method that I put in to fix pylint too few methods error"""
+        print("The count is ...")
+
+    def listen(self):
+        """This is the actual listener that stores messages in a queue"""
+        queue_ = queue.Queue(maxsize=5)
+        self.listeners.append(queue_)
+        return queue_
+
+@reciever_.route('/listen', methods=['GET'])
+def listen():
+    """This is the listener method"""
+    def stream():
+        anouncer = MessageAnnouncer()
+        messages = anouncer.listen()  # returns a queue.Queue
+        while True:
+            msg = messages.get()  # blocks until a new message arrives
+            yield msg
+
+    return flask.Response(stream(), mimetype='text/event-stream')

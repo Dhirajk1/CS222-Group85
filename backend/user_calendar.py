@@ -2,6 +2,7 @@
 Python objects for storing the calendar
 """
 import datetime
+from re import A
 from typing import List, Tuple
 from dataclasses import dataclass
 from calendar_utils import CalendarEntry, file_is_good, parse_ical
@@ -15,7 +16,7 @@ class UserCalendar:
     def __init__(self, calendar):
         self.entries = []
         self.user_id = calendar.user_id
-
+        self.events_completed = 0
         titles = calendar.details.split(",")
         times = calendar.times.split(",")
         if len(times) != len(titles):
@@ -70,6 +71,22 @@ class UserCalendar:
 
         return ",".join(titles_lst), ",".join(times_lst)
 
+    def get_count(self) -> int:
+        """
+        Get Calendar's count
+        """
+        return self.events_completed
+
+    def set_count(self, count) -> int:
+        """
+        Get Calendar's User
+        """
+        self.events_completed = count
+    def add_count(self) -> int:
+        """
+        Adds to the count
+        """
+        self.events_completed += 1
 
 if __name__ == "__main__":
 
