@@ -1,7 +1,7 @@
 """imports of necessary modules for app initilization and user class functionality"""
 from urllib import request
 import uuid
-from flask import request # pylint: disable=reimported
+from flask import request  # pylint: disable=reimported
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -62,6 +62,7 @@ def calendar_home():
     """
     return jsonify({"Loaded calendar page": True})
 
+
 @app.route("/test/calendar")
 def test_calendar():
     """
@@ -92,6 +93,7 @@ def test_calendar():
         }
     )
 
+
 @app.route("/test/events", methods=["GET"])
 def test_events():
     """testing whether the events are sendable"""
@@ -107,22 +109,19 @@ def test_events():
     database.session.add(new_calendar)  # pylint: disable=maybe-no-member
     database.session.commit()  # pylint: disable=maybe-no-member
     user = str(request.args.get("user_id"))
-    calendar = CalendarClass.query.filter_by(user_id = user).first()
-    if(calendar): # pylint: disable=superfluous-parens
+    calendar = CalendarClass.query.filter_by(user_id=user).first()
+    if calendar:  # pylint: disable=superfluous-parens
         my_calendar = UserCalendar(calendar)
         return jsonify(
-        {
-            "result": "Success?",
-            "info": {
-                "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
-            },
-        }
-    )
-
-    return jsonify(
-            {"no user found": False}
+            {
+                "result": "Success?",
+                "info": {
+                    "events_to_send": [e.to_str() for e in my_calendar.get_entries()],
+                },
+            }
         )
 
+    return jsonify({"no user found": False})
 
 
 # We need to do some peculiar things with our import so that our app
@@ -137,7 +136,9 @@ app.register_blueprint(login_, url_prefix="")
 from signup import signup_
 
 app.register_blueprint(signup_, url_prefix="")
-# pylint: enable=wrong-import-position
 
+from calendar_requests import calendar_requests_
+app.register_blueprint(calendar_requests_, url_prefix="/calendar")
+# pylint: enable=wrong-import-position
 if __name__ == "__main__":
     app.run(debug=True)

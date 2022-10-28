@@ -1,5 +1,7 @@
 """Testing for backend code"""
 import unittest
+
+# pylint
 import app as tested_app
 
 
@@ -76,7 +78,7 @@ class FlaskAppTests(unittest.TestCase):
         """
         Test to see if get calendar events work correct user
         """
-        req = self.app.get('/test/events', query_string={'user_id': 'myUser:('})
+        req = self.app.get("/test/events", query_string={"user_id": "myUser:("})
         expected = {
             "info": {
                 "events_to_send": [
@@ -92,7 +94,7 @@ class FlaskAppTests(unittest.TestCase):
         """
         Test to see if get calendar events work for wrong user
         """
-        req = self.app.get('/test/events', query_string={'user_id': 'myUser'})
+        req = self.app.get("/test/events", query_string={"user_id": "myUser"})
         self.assertEqual(
             req.json,
             {"no user found": False},
