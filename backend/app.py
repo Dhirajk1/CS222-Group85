@@ -149,8 +149,9 @@ def test_count_events():
         return jsonify(
             {"Success!": True}
         )
-
-
+    return jsonify(
+            {"Failure": False}
+        )
 
 
 # We need to do some peculiar things with our import so that our app

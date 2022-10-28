@@ -97,7 +97,7 @@ class FlaskAppTests(unittest.TestCase):
             req.json,
             {"no user found": False},
         )
-    
+
     def test_add_events(self):
         """
         Test to see if calendar add count works
