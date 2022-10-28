@@ -14,6 +14,9 @@ class FlaskAppTests(unittest.TestCase):
     def setUp(self):
         tested_app.app.config["TESTING"] = True
         self.app = tested_app.app.test_client()
+        with tested_app.app.app_context():
+            tested_app.database.drop_all()
+            tested_app.database.create_all()
 
     def test_default_route(self):
         """
@@ -44,7 +47,7 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(req.json, {"Login True": True})
 
     def test_login_incorrect(self):
-        """Inocorrect user login"""
+        """Incorrect user login"""
         req = self.app.post(
             "/login",
             data={
@@ -69,7 +72,7 @@ class FlaskAppTests(unittest.TestCase):
         )
 
     def test_get_events(self):
-        """keep"""
+        """Retrieving events"""
         with tested_app.app.app_context():
             tested_app.database.create_all()
             test_id = str(uuid.uuid1())
@@ -79,26 +82,26 @@ class FlaskAppTests(unittest.TestCase):
                     "2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00,"
                     "2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00"
                 ),
-                user_id="test123",
+                user_id="testmeplz",
                 details="EVENT,YO",
             )
             # next lines are not recognized as member actions by pylint
             tested_app.database.session.add(entry)  # pylint: disable=maybe-no-member
             tested_app.database.session.commit()  # pylint: disable=maybe-no-member
-            req = self.app.get("calendar/events/find", data={"user_id": "test123"})
+            req = self.app.get("calendar/events/find", data={"user_id": "testmeplz"})
             self.assertEqual(
                 req.json,
                 {
                     "events": [
                         {
-                            "end": "2022-08-25T11:30:00-05:00",
-                            "start": "2022-08-25T09:00:00-05:00",
                             "title": "EVENT",
+                            "start": "2022-08-25T09:00:00-05:00",
+                            "end": "2022-08-25T11:30:00-05:00",
                         },
                         {
-                            "end": "2022-08-25T11:30:00-05:00",
-                            "start": "2022-08-25T09:00:00-05:00",
                             "title": "YO",
+                            "start": "2022-08-25T09:00:00-05:00",
+                            "end": "2022-08-25T11:30:00-05:00",
                         },
                     ],
                     "found": True,
@@ -111,6 +114,39 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(
             req.json, {"sucess": False, "error": "user's calendar not found"}
         )
+
+    def test_add_event(self):
+        """add event for valid user"""
+        with tested_app.app.app_context():
+            tested_app.database.create_all()
+            test_id = str(uuid.uuid1())
+            entry = tested_app.CalendarClass(
+                identification=test_id,
+                times=(
+                    "2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00,"
+                    "2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00"
+                ),
+                user_id="testmeplz",
+                details="EVENT,YO",
+            )
+            # next lines are not recognized as member actions by pylint
+            tested_app.database.session.add(entry)  # pylint: disable=maybe-no-member
+            events = self.app.get(
+                "calendar/events/find", data={"user_id": "testmeplz"}
+            ).json
+            to_add = {
+                "title": "New Added Event",
+                "start": "2022-10-25T09:00:00-05:00",
+                "end": "2022-10-25T09:00:00-10:00",
+            }
+            events["events"].append(to_add)
+            req = self.app.post(
+                "/calendar/events/add",
+                data={"user_id": "testmeplz", **to_add},
+            )
+            self.assertEqual(req.json, {"success": True})
+            req = self.app.get("calendar/events/find", data={"user_id": "testmeplz"})
+            self.assertEqual(req.json, events)
 
 
 if __name__ == "__main__":

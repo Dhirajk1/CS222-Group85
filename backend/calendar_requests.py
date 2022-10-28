@@ -6,7 +6,7 @@ from user_calendar import UserCalendar
 
 # cyclic import avoided by import placement within file
 # pylint: disable=cyclic-import
-from app import CalendarClass
+from app import CalendarClass, database
 
 calendar_requests_ = Blueprint("calendar_requests_", __name__)
 
@@ -38,9 +38,15 @@ def get_events():
 @calendar_requests_.route("/events/add", methods=["POST"])
 def add_events():
     """add event to user's calendar"""
+    database.create_all()
     user = request.form.get("user_id")
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
         return jsonify({"sucess": False, "error": "user's calendar not found"})
-
-    return jsonify({"Implemented": False})
+    # appending to database entry
+    title = request.form.get("title")
+    start = request.form.get("start")
+    end = request.form.get("end")
+    calendar.details += f",{title}"
+    calendar.times += f",{start}=>{end}"
+    return jsonify({"success": True})

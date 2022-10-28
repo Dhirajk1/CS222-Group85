@@ -14,7 +14,6 @@ app.config["SECRET_KEY"] = "cs222"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
 database = SQLAlchemy()
 database.init_app(app)
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 
