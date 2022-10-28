@@ -2,9 +2,9 @@ name: backend test
 
 on:
   push:
-    branches: ["Backend Actions.yml"]
+    branches: ["Backend Actions.yml", "sendEventsToFront"]
   pull_request:
-    branches: ["Backend Actions.yml"]
+    branches: ["Backend Actions.yml", "sendEventsToFront"]
 
 jobs:
   build:
