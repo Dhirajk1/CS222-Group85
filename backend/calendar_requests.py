@@ -2,7 +2,6 @@
 from flask import jsonify
 from flask import Blueprint
 from flask import request
-from requests import RequestException
 from user_calendar import UserCalendar
 
 # cyclic import avoided by import placement within file
@@ -42,9 +41,6 @@ def add_events():
     user = request.form.get("user_id")
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
-        return jsonify({
-            "sucess": False,
-            "error": "user's calendar not found"
-        })
-    
+        return jsonify({"sucess": False, "error": "user's calendar not found"})
+
     return jsonify({"Implemented": False})
