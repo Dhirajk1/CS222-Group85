@@ -2,9 +2,12 @@ name: backend test
 
 on:
   push:
-    branches: ["backendFinal", "CalendarRequestRoutes"]
+    branches: ["backendFinal"]
   pull_request:
-    branches: ["backendFinal", "CalendarRequestRoutes"]
+    branches: ["backendFinal"]
+    types: 
+      - ready_for_review
+      - review_requested
 
 jobs:
   build:
