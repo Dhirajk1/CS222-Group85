@@ -16,12 +16,9 @@ def login():
 
     """login function that checks credentials"""
     if request.method == "POST":
-        print(request.form)
         password = request.form.get("password")
         email = request.form.get("email")
-        print(f"email: {email} password {password}")
         user = UserClass.query.filter_by(email=email).first()
-        print(user)
         if user and check_password_hash(user.password, password):
             return jsonify({"Login True": True}), 201
         return jsonify(

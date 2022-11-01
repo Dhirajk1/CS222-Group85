@@ -1,3 +1,6 @@
 *.pyc
 .sqlite
 *.DS_Store
+.pytest_cache/
+__pycache__/
+backend/instance/database.sqlite
