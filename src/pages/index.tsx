@@ -36,6 +36,7 @@ const Home: NextPage = () => {
     setError("");
   };
   return (
+    
     <div className="Home">
       {user.email != "" ? (
         <div className="welcome">
