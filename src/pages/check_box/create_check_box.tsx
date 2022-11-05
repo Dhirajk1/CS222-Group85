@@ -9,23 +9,17 @@ const App = () => {
 
   return (
     <div>
-      <Checkbox
-        label="My Value"
-        value={checked}
-        onChange={handleChange}
-      />
+      <label>
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={handleChange}
+        />
+        My Value
+      </label>
 
       <p>Is "My Value" checked? {checked.toString()}</p>
     </div>
-  );
-};
-
-const Checkbox = ({ label, value, onChange }) => {
-  return (
-    <label>
-      <input type="checkbox" checked={value} onChange={onChange} />
-      {label}
-    </label>
   );
 };
 
