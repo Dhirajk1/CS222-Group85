@@ -18,7 +18,7 @@ const App = () => {
         My Value
       </label>
 
-      <p>Is "My Value" checked {checked.toString()}</p>
+      <p>Is &lsquo;My Value&lsquo; checked? {checked.toString()}</p>
     </div>
   );
 };
