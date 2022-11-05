@@ -22,7 +22,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-// import logo from "./cs_222_logo.jpeg";
+import logo from "./cs_222_logo.jpeg";
 //Inspired by https://www.youtube.com/watch?v=7uKVFD_VMT8
 
 interface Details {
@@ -53,12 +53,12 @@ function CreateForm({ Create, error }: IProps) {
   };
   return (
   <div className="body">
-    {/* <div className="wrapper" role="logo">
+    <div className="wrapper" role="logo">
     <div className="logo">
       <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"
        width="200" height="200"/>
     </div>
-  </div> */}
+  </div>
     <div className="container2">
     <form className="form" role="form" id="create_account" onSubmit={(e) => submitHandler(e)}></form>
     <h1 className="form__title">Create Account</h1>

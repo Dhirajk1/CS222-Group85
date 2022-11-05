@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import React, { useState } from "react";
 import Image from "next/image";
-// import logo from "./cs_222_logo.jpeg";
+import logo from "./cs_222_logo.jpeg";
 //Inspired by https://www.youtube.com/watch?v=7uKVFD_VMT8
 
 interface Details {
@@ -28,12 +28,12 @@ function LoginForm({ Login, error }: IProps) {
   };
   return (
   <div className="body">
-    {/* <div className="wrapper" role="logo">
+    <div className="wrapper" role="logo">
     <div className="logo">
       <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"
         width="200" height="200"/>
     </div>
-  </div> */}
+  </div>
   <div className="container">
     <form className="form" role="form" id="login" onSubmit={(e) => submitHandler(e)}>
         <h1 className="form__title">Login</h1>
