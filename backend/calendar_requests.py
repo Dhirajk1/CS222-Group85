@@ -72,3 +72,27 @@ def remove_event():
     calendar.times = ",".join(times)
     calendar.details = ",".join(details)
     return jsonify({"success": True})
+
+
+@calendar_requests_.route("/events/edit", methods=["POST"])
+def edit_event():
+    """Edit an existing event"""
+    database.create_all()
+    user = request.form.get("user_id")
+    date = request.form.get("date")  # iso format date string (key)
+    new_detail = request.form.get("detail")
+    calendar = CalendarClass.query.filter_by(user_id=user).first()
+    if not calendar:
+        return jsonify({"sucess": False, "error": "user's calendar not found"})
+    # appending to database entry
+    times = []
+    details = []
+    for time, detail in zip(calendar.times.split(","), calendar.details.split(",")):
+        times.append(time)
+        if time.startswith(date):
+            details.append(new_detail)
+        else:
+            details.append(detail)
+    calendar.times = ",".join(times)
+    calendar.details = ",".join(details)
+    return jsonify({"success": True})
