@@ -148,6 +148,81 @@ class FlaskAppTests(unittest.TestCase):
             req = self.app.get("calendar/events/find", data={"user_id": "testmeplz"})
             self.assertEqual(req.json, events)
 
+    def test_remove_event_exists(self):
+        """Testing removing an event"""
+        with tested_app.app.app_context():
+            tested_app.database.create_all()
+            test_id = str(uuid.uuid1())
+            entry = tested_app.CalendarClass(
+                identification=test_id,
+                times=(
+                    "2022-08-25T09:00:00-05:00=>2022-08-25T11:30:00-05:00,"
+                    "2022-08-25T09:00:00-06:00=>2022-09-25T11:30:00-05:00"
+                ),
+                user_id="testmeplz",
+                details="EVENT,YO",
+            )
+            # next lines are not recognized as member actions by pylint
+            tested_app.database.session.add(entry)  # pylint: disable=maybe-no-member
+            req = self.app.post(
+                "calendar/events/remove",
+                data={"user_id": "testmeplz", "date": "2022-08-25T09:00:00-05:00"},
+            )
+            events = self.app.get(
+                "calendar/events/find", data={"user_id": "testmeplz"}
+            ).json
+            self.assertEqual(
+                events["events"],
+                [
+                    {
+                        "end": "2022-09-25T11:30:00-05:00",
+                        "start": "2022-08-25T09:00:00-06:00",
+                        "title": "YO",
+                    }
+                ],
+            )
+            self.assertEqual(req.json, {"success": True})
+
+    def test_remove_event_invalid(self):
+        """try to remove"""
+        with tested_app.app.app_context():
+            tested_app.database.create_all()
+            test_id = str(uuid.uuid1())
+            entry = tested_app.CalendarClass(
+                identification=test_id,
+                times=(
+                    "2022-08-25T09:00:00-07:00=>2022-08-25T11:30:00-05:00,"
+                    "2022-08-25T09:00:00-06:00=>2022-09-25T11:30:00-05:00"
+                ),
+                user_id="testmeplz",
+                details="EVENT,YO",
+            )
+            # next lines are not recognized as member actions by pylint
+            tested_app.database.session.add(entry)  # pylint: disable=maybe-no-member
+            req = self.app.post(
+                "calendar/events/remove",
+                data={"user_id": "testmeplz", "date": "2022-08-25T09:00:00-05:00"},
+            )
+            events = self.app.get(
+                "calendar/events/find", data={"user_id": "testmeplz"}
+            ).json
+            self.assertEqual(
+                events["events"],
+                [
+                    {
+                        "end": "2022-08-25T11:30:00-05:00",
+                        "start": "2022-08-25T09:00:00-07:00",
+                        "title": "EVENT",
+                    },
+                    {
+                        "end": "2022-09-25T11:30:00-05:00",
+                        "start": "2022-08-25T09:00:00-06:00",
+                        "title": "YO",
+                    },
+                ],
+            )
+            self.assertEqual(req.json, {"success": True})
+
 
 if __name__ == "__main__":
     unittest.main()
