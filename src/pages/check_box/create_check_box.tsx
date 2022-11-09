@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const App = () => {
+const MyCheckbox = () => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
@@ -23,4 +23,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MyCheckbox;
