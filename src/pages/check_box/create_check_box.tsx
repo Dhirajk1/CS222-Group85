@@ -5,14 +5,15 @@ const MyCheckbox = () => {
 
   const handleChange = () => {
     setChecked(!checked);
+    <img src="./happy.jpg" height="200" width="200"></img>
   };
 
   return (
     <div>
       <label>
-        <input
-          type="checkbox"
-          checked={checked}
+        <Checkbox
+          label="My Value"
+          value={checked}
           onChange={handleChange}
         />
         My Value
@@ -20,6 +21,15 @@ const MyCheckbox = () => {
 
       <p>Is &lsquo;My Value&lsquo; checked? {checked.toString()}</p>
     </div>
+  );
+};
+
+const Checkbox = ({label, value, onChange }: any) => {
+  return (
+    <label>
+      <input type="checkbox" checked={value} onChange={onChange} />
+      {label}
+    </label>
   );
 };
 
