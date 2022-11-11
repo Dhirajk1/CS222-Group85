@@ -2,13 +2,14 @@ import { check } from 'prettier';
 import * as React from 'react';
 import { text } from 'stream/consumers';
 
+//this is the checkbox type that I created
 const MyCheckbox = () => {
   const [checked, setChecked] = React.useState(false);
-
+  //toggles the state of checked
   const handleChange = () => {
     setChecked(!checked);
   };
-
+  //handles changes and also displays image if checkbox is clicked
   return (
     <div>
       <label>
@@ -23,7 +24,6 @@ const MyCheckbox = () => {
       {
         checked? <img alt="happy face" src={'./happy.jpeg'}/> :null
       }
-      {/* <p>checked? {checked.toString() ? <img alt="happy face" src={'./happy.jpeg'}/> : "false"}</p> */}
     </div>
   );
 };

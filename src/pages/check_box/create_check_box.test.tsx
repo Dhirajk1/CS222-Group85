@@ -18,6 +18,7 @@ test('Initial conditions', () => {
   })
     
   it('displays a happy face', () => {
+    //only displays happy face if checkbox is clicked
       render(<MyCheckbox />)
       const checkbox = screen.getByRole('checkbox')
       fireEvent.click(checkbox)
