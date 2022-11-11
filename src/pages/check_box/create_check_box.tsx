@@ -1,11 +1,12 @@
+import { check } from 'prettier';
 import * as React from 'react';
+import { text } from 'stream/consumers';
 
 const MyCheckbox = () => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
     setChecked(!checked);
-    <img src="./happy.jpg" height="200" width="200"></img>
   };
 
   return (
@@ -18,8 +19,11 @@ const MyCheckbox = () => {
         />
         My Value
       </label>
-
       <p>Is &lsquo;My Value&lsquo; checked? {checked.toString()}</p>
+      {
+        checked? <img alt="happy face" src={'./happy.jpeg'}/> :null
+      }
+      {/* <p>checked? {checked.toString() ? <img alt="happy face" src={'./happy.jpeg'}/> : "false"}</p> */}
     </div>
   );
 };
