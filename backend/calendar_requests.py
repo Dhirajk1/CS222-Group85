@@ -20,8 +20,8 @@ def get_events():
         my_calendar = UserCalendar(calendar)
         return jsonify(
             {
-                "found": True,
-                "events": [
+                "Found": True,
+                "Events": [
                     {
                         "title": entry.title,
                         "start": entry.start.isoformat(),
@@ -32,7 +32,7 @@ def get_events():
             }
         )
 
-    return jsonify({"found": False})
+    return jsonify({"Found": False})
 
 
 @calendar_requests_.route("/events/add", methods=["POST"])
@@ -44,7 +44,7 @@ def add_events():
     calendar = CalendarClass.query.filter_by(user_id=user).first()
 
     if not calendar:
-        return jsonify({"sucess": False, "error": "user's calendar not found"})
+        return jsonify({"Success": False, "Log": "user's calendar not found"})
 
     # appending to database entry
     title = request.form.get("title")
@@ -54,7 +54,7 @@ def add_events():
     calendar.details += f",{title}"
     calendar.times += f",{start}=>{end}"
 
-    return jsonify({"success": True})
+    return jsonify({"Success": True})
 
 
 @calendar_requests_.route("/events/remove", methods=["POST"])
@@ -67,7 +67,7 @@ def remove_event():
 
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
-        return jsonify({"sucess": False, "error": "user's calendar not found"})
+        return jsonify({"Success": False, "error": "user's calendar not found"})
 
     # appending to database entry
     times = []
@@ -79,7 +79,7 @@ def remove_event():
 
     calendar.times = ",".join(times)
     calendar.details = ",".join(details)
-    return jsonify({"success": True})
+    return jsonify({"Success": True})
 
 
 @calendar_requests_.route("/events/edit", methods=["POST"])
@@ -92,7 +92,7 @@ def edit_event():
 
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
-        return jsonify({"Sucess": False, "Log": "user's calendar not found"})
+        return jsonify({"Success": False, "Log": "user's calendar not found"})
 
     # appending to database entry
     times = []
@@ -107,4 +107,4 @@ def edit_event():
     calendar.times = ",".join(times)
     calendar.details = ",".join(details)
 
-    return jsonify({"Suceess": True})
+    return jsonify({"Success": True})

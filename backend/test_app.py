@@ -58,7 +58,7 @@ class FlaskAppTests(unittest.TestCase):
         )
         self.assertEqual(
             req.json,
-            {"Login": False, "log": "invalid credentials"},
+            {"Login": False, "Log": "invalid credentials"},
         )
 
     def test_get_events_fail(self):
@@ -68,7 +68,7 @@ class FlaskAppTests(unittest.TestCase):
         req = self.app.get("/calendar/events/find", data={"user_id": "myUser"})
         self.assertEqual(
             req.json,
-            {"found": False},
+            {"Found": False},
         )
 
     def test_get_events(self):
@@ -92,7 +92,7 @@ class FlaskAppTests(unittest.TestCase):
             self.assertEqual(
                 req.json,
                 {
-                    "events": [
+                    "Events": [
                         {
                             "title": "EVENT",
                             "start": "2022-08-25T09:00:00-05:00",
@@ -104,7 +104,7 @@ class FlaskAppTests(unittest.TestCase):
                             "end": "2022-08-25T11:30:00-05:00",
                         },
                     ],
-                    "found": True,
+                    "Found": True,
                 },
             )
 
@@ -112,7 +112,7 @@ class FlaskAppTests(unittest.TestCase):
         """add event for user not present"""
         req = self.app.post("/calendar/events/add", data={"user_id": "sdkfljnalsf"})
         self.assertEqual(
-            req.json, {"sucess": False, "error": "user's calendar not found"}
+            req.json, {"Success": False, "Log": "user's calendar not found"}
         )
 
     def test_add_event(self):
@@ -139,12 +139,12 @@ class FlaskAppTests(unittest.TestCase):
                 "start": "2022-10-25T09:00:00-05:00",
                 "end": "2022-10-25T09:00:00-10:00",
             }
-            events["events"].append(to_add)
+            events["Events"].append(to_add)
             req = self.app.post(
                 "/calendar/events/add",
                 data={"user_id": "testmeplz", **to_add},
             )
-            self.assertEqual(req.json, {"success": True})
+            self.assertEqual(req.json, {"Success": True})
             req = self.app.get("calendar/events/find", data={"user_id": "testmeplz"})
             self.assertEqual(req.json, events)
 
@@ -172,7 +172,7 @@ class FlaskAppTests(unittest.TestCase):
                 "calendar/events/find", data={"user_id": "testmeplz"}
             ).json
             self.assertEqual(
-                events["events"],
+                events["Events"],
                 [
                     {
                         "end": "2022-09-25T11:30:00-05:00",
@@ -181,7 +181,7 @@ class FlaskAppTests(unittest.TestCase):
                     }
                 ],
             )
-            self.assertEqual(req.json, {"success": True})
+            self.assertEqual(req.json, {"Success": True})
 
     def test_remove_event_invalid(self):
         """try to remove"""
@@ -207,7 +207,7 @@ class FlaskAppTests(unittest.TestCase):
                 "calendar/events/find", data={"user_id": "testmeplz"}
             ).json
             self.assertEqual(
-                events["events"],
+                events["Events"],
                 [
                     {
                         "end": "2022-08-25T11:30:00-05:00",
@@ -221,7 +221,7 @@ class FlaskAppTests(unittest.TestCase):
                     },
                 ],
             )
-            self.assertEqual(req.json, {"success": True})
+            self.assertEqual(req.json, {"Success": True})
 
     def test_edit_event(self):
         """Testing editing event"""
@@ -251,7 +251,7 @@ class FlaskAppTests(unittest.TestCase):
                 "calendar/events/find", data={"user_id": "testmeplz"}
             ).json
             self.assertEqual(
-                events["events"],
+                events["Events"],
                 [
                     {
                         "end": "2022-08-25T11:30:00-05:00",
@@ -265,7 +265,7 @@ class FlaskAppTests(unittest.TestCase):
                     },
                 ],
             )
-            self.assertEqual(req.json, {"success": True})
+            self.assertEqual(req.json, {"Success": True})
 
 
 if __name__ == "__main__":
