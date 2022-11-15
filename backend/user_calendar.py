@@ -26,7 +26,7 @@ class UserCalendar:
 
         if len(times) != len(titles):
             raise ValueError("Title and Time Counts don't match")
-            
+
         for title, time in zip(titles, times):
             if "=>" not in time:
                 raise ValueError("Invalid Format :(", time)

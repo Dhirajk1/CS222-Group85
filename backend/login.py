@@ -1,12 +1,7 @@
 """imports of necessary modules for login/logout functionality"""
-from flask import jsonify
-from flask import Blueprint
-from flask import request
+from flask import jsonify, Blueprint, request
 from werkzeug.security import check_password_hash
-
-# cyclic import avoided by import placement within file
-# pylint: disable=cyclic-import
-from app import UserClass
+from stuff import UserClass
 
 login_ = Blueprint("login_", __name__)
 

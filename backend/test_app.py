@@ -23,7 +23,7 @@ class FlaskAppTests(unittest.TestCase):
         Test to make sure default route successfully return
         """
         res = self.app.get("/")
-        self.assertEqual(res.json, {"Loaded calendar page": True})
+        self.assertEqual(res.json, {"Default Load": True})
 
     def test_login_new_user(self):
         """tests basic login functionality"""

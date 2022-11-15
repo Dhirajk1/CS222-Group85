@@ -4,10 +4,7 @@ Functions for handling user signup
 import uuid
 from flask import jsonify, Blueprint, request
 from werkzeug.security import generate_password_hash
-
-# cyclic import avoided by import placement within file
-# pylint: disable=cyclic-import
-from app import UserClass, database
+from stuff import UserClass, database
 
 signup_ = Blueprint("signup_", __name__)
 

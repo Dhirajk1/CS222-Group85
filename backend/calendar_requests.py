@@ -1,12 +1,7 @@
 """imports of necessary modules for getting calandar events functionality"""
-from flask import jsonify
-from flask import Blueprint
-from flask import request
+from flask import jsonify, Blueprint, request
 from user_calendar import UserCalendar
-
-# cyclic import avoided by import placement within file
-# pylint: disable=cyclic-import
-from app import CalendarClass, database
+from stuff import CalendarClass, database
 
 calendar_requests_ = Blueprint("calendar_requests_", __name__)
 
