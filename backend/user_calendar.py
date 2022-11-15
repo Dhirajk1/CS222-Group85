@@ -15,12 +15,16 @@ class UserCalendar:
     def __init__(self, calendar):
         self.entries = []
         self.user_id = calendar.user_id
-
+        if not calendar.details or not calendar.times:
+            print("No events added")
+            return
         titles = calendar.details.split(",")
         times = calendar.times.split(",")
         if len(times) != len(titles):
             raise ValueError("Title and Time Counts don't match")
         for title, time in zip(titles, times):
+            if "=>" not in time:
+                raise ValueError("Invalid Format :(", time)
             start, end = time.split("=>")
             self.entries.append(
                 CalendarEntry(

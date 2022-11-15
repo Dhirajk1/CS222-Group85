@@ -2,10 +2,10 @@ name: backend test
 
 on:
   push:
-    branches: ["backendFinal"]
+    branches: ["backendFinal", "CalendarEditRoutes"]
   pull_request:
-    branches: ["backendFinal"]
-    types: 
+    branches: ["backendFinal", "CalendarEditRoutes"]
+    types:
       - ready_for_review
       - review_requested
 
