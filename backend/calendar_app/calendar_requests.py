@@ -1,7 +1,7 @@
 """imports of necessary modules for getting calandar events functionality"""
-from flask import jsonify, Blueprint, request
-from user_calendar import UserCalendar
 from app_components import CalendarClass, database
+from flask import Blueprint, jsonify, request
+from .user_calendar import UserCalendar
 
 calendar_requests_ = Blueprint("calendar_requests_", __name__)
 

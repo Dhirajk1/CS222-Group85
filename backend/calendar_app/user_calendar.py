@@ -4,7 +4,7 @@ Python objects for storing the calendar
 import datetime
 from typing import List, Tuple
 from dataclasses import dataclass
-from calendar_utils import CalendarEntry, file_is_good, parse_ical
+from .calendar_utils import CalendarEntry, file_is_good, parse_ical
 
 
 class UserCalendar:
