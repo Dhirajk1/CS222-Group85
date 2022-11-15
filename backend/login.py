@@ -11,25 +11,19 @@ from app import UserClass
 login_ = Blueprint("login_", __name__)
 
 
-@login_.route("/login", methods=["GET", "POST"])
+@login_.route("/login", methods=["POST"])
 def login():
 
     """login function that checks credentials"""
-    if request.method == "POST":
-        password = request.form.get("password")
-        email = request.form.get("email")
-        user = UserClass.query.filter_by(email=email).first()
-        if user and check_password_hash(user.password, password):
-            return jsonify({"Login True": True}), 201
-        return jsonify(
-            {"Login Fail, username and password are incorrect or don't match": False}
-        )
-    return jsonify({"Return login page": True}), 201
+    password = request.form.get("password")
+    email = request.form.get("email")
 
+    user = UserClass.query.filter_by(email=email).first()
 
-@login_.route("/logout")
-def logout():
+    if user and check_password_hash(user.password, password):
+        return jsonify({"Login": True}), 201
 
-    """function that logs the user out, outputs if successful"""
-
-    return jsonify({"Logout Success": True})
+    return jsonify({
+        "Login": False,
+        "log": "invalid credentials"
+    })

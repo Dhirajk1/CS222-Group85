@@ -42,14 +42,18 @@ def add_events():
     database.create_all()
     user = request.form.get("user_id")
     calendar = CalendarClass.query.filter_by(user_id=user).first()
+
     if not calendar:
         return jsonify({"sucess": False, "error": "user's calendar not found"})
+
     # appending to database entry
     title = request.form.get("title")
     start = request.form.get("start")
     end = request.form.get("end")
+
     calendar.details += f",{title}"
     calendar.times += f",{start}=>{end}"
+
     return jsonify({"success": True})
 
 
@@ -57,11 +61,14 @@ def add_events():
 def remove_event():
     """Remove an event (by time) from the calendar"""
     database.create_all()
+
     user = request.form.get("user_id")
     date = request.form.get("date")  # iso format date string
+
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
         return jsonify({"sucess": False, "error": "user's calendar not found"})
+
     # appending to database entry
     times = []
     details = []
@@ -69,6 +76,7 @@ def remove_event():
         if not time.startswith(date):
             times.append(time)
             details.append(detail)
+
     calendar.times = ",".join(times)
     calendar.details = ",".join(details)
     return jsonify({"success": True})
@@ -81,9 +89,11 @@ def edit_event():
     user = request.form.get("user_id")
     date = request.form.get("date")  # iso format date string (key)
     new_detail = request.form.get("detail")
+
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
         return jsonify({"sucess": False, "error": "user's calendar not found"})
+
     # appending to database entry
     times = []
     details = []
@@ -93,6 +103,8 @@ def edit_event():
             details.append(new_detail)
         else:
             details.append(detail)
+
     calendar.times = ",".join(times)
     calendar.details = ",".join(details)
+    
     return jsonify({"success": True})

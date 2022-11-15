@@ -44,7 +44,7 @@ class FlaskAppTests(unittest.TestCase):
                 "password": "fjdanksjn",
             },
         )
-        self.assertEqual(req.json, {"Login True": True})
+        self.assertEqual(req.json, {"Login": True})
 
     def test_login_incorrect(self):
         """Incorrect user login"""
@@ -58,7 +58,7 @@ class FlaskAppTests(unittest.TestCase):
         )
         self.assertEqual(
             req.json,
-            {"Login Fail, username and password are incorrect or don't match": False},
+            {"Login": False, "log": "invalid credentials"},
         )
 
     def test_get_events_fail(self):
