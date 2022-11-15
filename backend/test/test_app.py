@@ -18,49 +18,6 @@ class FlaskAppTests(unittest.TestCase):
             tested_app.database.drop_all()
             tested_app.database.create_all()
 
-    def test_default_route(self):
-        """
-        Test to make sure default route successfully return
-        """
-        res = self.app.get("/")
-        self.assertEqual(res.json, {"Default Load": True})
-
-    def test_login_new_user(self):
-        """tests basic login functionality"""
-        req = self.app.post(
-            "/signup",
-            data={
-                "email": "Aryan@gmail.com",
-                "username": "aryan",
-                "password": "fjdanksjn",
-            },
-        )
-        assert req.json
-        req = self.app.post(
-            "/login",
-            data={
-                "email": "Aryan@gmail.com",
-                "username": "aryan",
-                "password": "fjdanksjn",
-            },
-        )
-        self.assertEqual(req.json, {"Login": True})
-
-    def test_login_incorrect(self):
-        """Incorrect user login"""
-        req = self.app.post(
-            "/login",
-            data={
-                "email": "Aryan@gmail.com",
-                "username": "aryan",
-                "password": "fjdanksn",
-            },
-        )
-        self.assertEqual(
-            req.json,
-            {"Login": False, "Log": "invalid credentials"},
-        )
-
     def test_get_events_fail(self):
         """
         Test to see if get calendar events work for wrong user
