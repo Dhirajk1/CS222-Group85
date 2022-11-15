@@ -92,7 +92,7 @@ def edit_event():
 
     calendar = CalendarClass.query.filter_by(user_id=user).first()
     if not calendar:
-        return jsonify({"sucess": False, "error": "user's calendar not found"})
+        return jsonify({"Sucess": False, "Log": "user's calendar not found"})
 
     # appending to database entry
     times = []
@@ -106,5 +106,5 @@ def edit_event():
 
     calendar.times = ",".join(times)
     calendar.details = ",".join(details)
-    
-    return jsonify({"success": True})
+
+    return jsonify({"Suceess": True})

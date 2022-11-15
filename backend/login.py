@@ -25,5 +25,5 @@ def login():
 
     return jsonify({
         "Login": False,
-        "log": "invalid credentials"
+        "Log": "invalid credentials"
     })

@@ -25,7 +25,7 @@ def signup():
     user_username = UserClass.query.filter_by(username=username).first()
 
     if user_email or user_username:
-        return jsonify({"User Added": False, "log": "User already exists"})
+        return jsonify({"User Added": False, "Log": "User already exists"})
 
     new_current_user = UserClass(
         identification=str(uuid.uuid1()),
