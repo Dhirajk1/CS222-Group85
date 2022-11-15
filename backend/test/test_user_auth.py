@@ -1,22 +1,14 @@
+""" Test for user authentication """
 import unittest
-import uuid
-
-# pylint
-import app as tested_app
+from .flask_tester import FlaskTester
 
 
-class FlaskAppTests(unittest.TestCase):
+class FlaskAppTests(FlaskTester):
     """
-    Class for streamlining tests on the `app.py` (flask)
+    Class to test user auth features
     """
 
-    def setUp(self):
-        tested_app.app.config["TESTING"] = True
-        self.app = tested_app.app.test_client()
-        with tested_app.app.app_context():
-            tested_app.database.drop_all()
-            tested_app.database.create_all()
-        def test_login_new_user(self):
+    def test_login_new_user(self):
         """tests basic login functionality"""
         req = self.app.post(
             "/signup",
@@ -51,6 +43,7 @@ class FlaskAppTests(unittest.TestCase):
             req.json,
             {"Login": False, "Log": "invalid credentials"},
         )
+
 
 if __name__ == "__main__":
     unittest.main()

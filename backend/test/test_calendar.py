@@ -1,22 +1,14 @@
-"""Testing for backend code"""
+""" Test for calendar features """
 import unittest
 import uuid
-
-# pylint
 import app as tested_app
+from .flask_tester import FlaskTester
 
 
-class FlaskAppTests(unittest.TestCase):
+class FlaskAppTests(FlaskTester):
     """
-    Class for streamlining tests on the `app.py` (flask)
+    Class for testing calendar features
     """
-
-    def setUp(self):
-        tested_app.app.config["TESTING"] = True
-        self.app = tested_app.app.test_client()
-        with tested_app.app.app_context():
-            tested_app.database.drop_all()
-            tested_app.database.create_all()
 
     def test_get_events_fail(self):
         """
