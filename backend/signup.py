@@ -4,7 +4,7 @@ Functions for handling user signup
 import uuid
 from flask import jsonify, Blueprint, request
 from werkzeug.security import generate_password_hash
-from stuff import UserClass, database
+from app_components import UserClass, database
 
 signup_ = Blueprint("signup_", __name__)
 

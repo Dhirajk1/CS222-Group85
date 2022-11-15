@@ -96,6 +96,7 @@ if __name__ == "__main__":
         user_id="myUser:)",
         details="EVENT",
     )
+
     sample_calendar = UserCalendar(short_input)
     sample_calendar.print()
 

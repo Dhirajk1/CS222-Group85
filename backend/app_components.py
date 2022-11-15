@@ -1,28 +1,30 @@
-"""STuff"""
+"""Component for the Flask app"""
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_login import UserMixin
 
-# pylint: disable=too-few-public-methods
 # methods are broken up into different files
+# pylint: disable=too-few-public-methods
 
 app = Flask(__name__)
 CORS(app)
 
-
 app.config["SECRET_KEY"] = "cs222"
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
 database = SQLAlchemy()
 database.init_app(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+################### Database Schemas #########################
 class UserClass(database.Model, UserMixin):
     """
-    user class that inherits from UserMixin for default methods
+    User class that inherits from UserMixin for default methods
     for flask login lib and from the SQLAlchemy
     """
 
