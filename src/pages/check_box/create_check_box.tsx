@@ -43,7 +43,7 @@ const MyCheckbox = () => {
     </div>
   );
 };
-
+//template for future checkboxes
 const Checkbox = ({label, value, onChange }: any) => {
   return (
     <label>
