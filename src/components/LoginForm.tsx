@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "./cs_222_logo.jpeg";
@@ -28,15 +25,10 @@ function LoginForm({ Login, error }: IProps) {
   };
   return (
   <div className="body">
-    {/* <p><a href="http://localhost:3000/creator">Don&apos;t have an Account? Create Account</a></p> */}
     <div className="wrapper" role="logo">
     <div className="logo">
-      <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"
-        width="200" height="200"/>
+      <Image className="img" src={logo} layout="intrinsic" alt="Company Logo"/>
     </div>
-  </div>
-  <div className="navBar">
-    
   </div>
   <div className="container">
     <form className="form" role="form" id="login" onSubmit={(e) => submitHandler(e)}>
@@ -84,8 +76,6 @@ function LoginForm({ Login, error }: IProps) {
         </div>
 
         <input aria-label="button" className="form__button" type="submit" value="LOGIN" />
-        {/* <input aria-label="button" className="form__button" type="submit" value="Create" /> */}
-        <p><a href="http://localhost:3000/creator">Don&apos;t have an Account? Create Account</a></p>
     </form>
     </div>
     </div>

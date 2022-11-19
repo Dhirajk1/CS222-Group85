@@ -1,0 +1,100 @@
+{
+  "name": "jest-preview",
+  "version": "0.2.3",
+  "description": "Preview your HTML code while using Jest",
+  "keywords": [
+    "testing",
+    "jest",
+    "frontend",
+    "productivity",
+    "debug",
+    "preview jest"
+  ],
+  "homepage": "https://github.com/nvh95/jest-preview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvh95/jest-preview.git"
+  },
+  "license": "MIT",
+  "author": "nvh95",
+  "main": "dist/index.js",
+  "bin": {
+    "jest-preview": "./cli/index.js"
+  },
+  "files": [
+    "dist",
+    "transforms",
+    "cli"
+  ],
+  "scripts": {
+    "docs": "cd website && npm run start -- --port 3001",
+    "build:docs": "cd website && npm run build",
+    "dev": "vite",
+    "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
+    "build": "rimraf dist && npm run build:only && npm run types",
+    "build:legacy::only": "vite build",
+    "build:legacy:watch": "vite build --watch",
+    "build:only": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "prepublishOnly": "npm run build",
+    "publish:alpha": "npm publish --tag alpha",
+    "publish:latest": "npm publish",
+    "preview": "vite preview",
+    "server": "node cli/index.js",
+    "server:watch": "nodemon cli/index.js",
+    "test:dev": "cross-env NODE_ENV=test jest --watch --no-cache App",
+    "test:ci": "cross-env NODE_ENV=test jest",
+    "clearCache": "rimraf node_modules/.cache/jest-preview && jest --clearCache",
+    "test": "npm-run-all -p server test:dev",
+    "prettier": "prettier server src --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "sort": "npx sort-package-json",
+    "postinstall": "bash -c \"[[ '$INIT_CWD' == '$PWD' ]] && echo Inside Jest Preview. Do not clear Cache. || jest --clearCache || echo\"",
+    "publish:local": "npm publish --registry http://localhost:4873/"
+  },
+  "dependencies": {
+    "camelcase": "^6.3.0",
+    "chokidar": "^3.5.3",
+    "commander": "^9.2.0",
+    "connect": "^3.7.0",
+    "open": "^8.4.0",
+    "postcss": "^8.4.12",
+    "postcss-modules": "^4.3.1",
+    "sirv": "^2.0.2",
+    "slash": "^3.0.0",
+    "ws": "^8.5.0"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@stitches/react": "^1.2.8",
+    "@swc/core": "^1.2.154",
+    "@swc/jest": "^0.2.20",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@types/styled-components": "^5.1.24",
+    "@vitejs/plugin-react": "^1.3.0",
+    "cross-env": "^7.0.3",
+    "jest": "^27.5.1",
+    "jest-watch-typeahead": "^1.0.0",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.70.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "sass": "^1.50.0",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.1"
+  },
+  "bug": {
+    "url": "https://github.com/nvh95/jest-preview/issues"
+  }
+}
