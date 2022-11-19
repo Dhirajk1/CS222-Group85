@@ -6,7 +6,7 @@ import logo from "./cs_222_logo.jpeg";
 interface Details {
   name: string;
   email: string;
-  password: string;
+  password: string; 
 }
 interface IProps {
   Login: (arg0: Details) => void;
