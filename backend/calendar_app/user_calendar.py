@@ -4,7 +4,7 @@ Python objects for storing the calendar
 import datetime
 from typing import List, Tuple
 from dataclasses import dataclass
-from calendar_utils import CalendarEntry, file_is_good, parse_ical
+from .calendar_utils import CalendarEntry, file_is_good, parse_ical
 
 
 class UserCalendar:
@@ -15,13 +15,18 @@ class UserCalendar:
     def __init__(self, calendar):
         self.entries = []
         self.user_id = calendar.user_id
+
+        # No data to create calendar
         if not calendar.details or not calendar.times:
             print("No events added")
             return
+
         titles = calendar.details.split(",")
         times = calendar.times.split(",")
+
         if len(times) != len(titles):
             raise ValueError("Title and Time Counts don't match")
+
         for title, time in zip(titles, times):
             if "=>" not in time:
                 raise ValueError("Invalid Format :(", time)
@@ -91,6 +96,7 @@ if __name__ == "__main__":
         user_id="myUser:)",
         details="EVENT",
     )
+
     sample_calendar = UserCalendar(short_input)
     sample_calendar.print()
 
